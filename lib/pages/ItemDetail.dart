@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scope_demo/models/DotWidget.dart';
+import 'package:scope_demo/widgets/DotWidget.dart';
 
 
 class ItemDetailPage extends StatefulWidget{
