@@ -77,7 +77,6 @@ class ShopItemModel {
   ShopItemModel({required this.fav, required this.rating, required this.price, required this.image, required this.name});
 
   factory ShopItemModel.fromJson(Map<String, dynamic> json) {
-    print(double.parse(json['rating'].toString()));
     return ShopItemModel(
       fav: json['fav'],
       rating: json['rating'],
@@ -86,18 +85,4 @@ class ShopItemModel {
       name: json['name']
     );
   }
-}
-
-
-class ShoppingItems {
-  List<ShopItemModel> shoppingList = [];
-
-  List<ShopItemModel> getShoppingItems() {
-    data.forEach((element) {
-      shoppingList.add(ShopItemModel.fromJson(element));
-    });
-    return shoppingList;
-  }
-
-  List<ShopItemModel> get items => getShoppingItems();
 }

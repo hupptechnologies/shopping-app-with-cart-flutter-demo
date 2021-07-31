@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scope_demo/Cart.dart';
-import 'package:scope_demo/Details.dart';
-import 'package:scope_demo/Home.dart';
-import 'package:scope_demo/ScopeManage.dart';
 import 'package:scope_demo/pages/HomePage.dart';
-import 'package:scoped_model/scoped_model.dart';
 
 void main(){
   runApp(Main());

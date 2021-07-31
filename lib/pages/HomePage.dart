@@ -2,14 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:scope_demo/models/ItemModel.dart';
 import 'package:scope_demo/pages/CartPage.dart';
 import 'package:scope_demo/pages/ItemDetail.dart';
+import 'package:scope_demo/services/itemService.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+
+  ItemServices itemServices = ItemServices();
+  List<ShopItemModel> items = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    itemServices.loadItems();
+    setState(() {
+      items = itemServices.items;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-
-    List<ShopItemModel> items = ShoppingItems().items;
-
-    print(items);
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
