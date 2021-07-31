@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scope_demo/models/ItemModel.dart';
+import 'package:scope_demo/pages/CartPage.dart';
 import 'package:scope_demo/pages/ItemDetail.dart';
 
 class HomePage extends StatelessWidget {
@@ -19,8 +20,8 @@ class HomePage extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: InkResponse(
               onTap: () {
-                // Navigator.push(context,
-                //     MaterialPageRoute(builder: (context) => Cart()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CartPage()));
               },
               child: Stack(
                 children: [
@@ -73,12 +74,6 @@ class ItemView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-
-    // return Padding(
-    //   padding: EdgeInsets.all(5),
-    //   child: Text("Hello"),
-    // );
-
     return   Padding(
           padding: EdgeInsets.all(5.0),
           child: InkResponse(

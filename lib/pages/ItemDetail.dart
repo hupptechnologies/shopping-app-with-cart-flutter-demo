@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scope_demo/widgets/CustomButton.dart';
 import 'package:scope_demo/widgets/DotWidget.dart';
 
 
@@ -156,15 +157,9 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                   ],
                 ),
               ),
-              RaisedButton(
-                color: Colors.deepOrange,
-                onPressed: (){
-                  // model.addCart(widget.detail);
-                  // Timer(Duration(milliseconds: 500), (){
-                  //   showCartSnak(model.cartMsg,model.success);
-                  // });
-                },
-                child: Text("ADD TO CART",style: TextStyle(color: Colors.white),),
+              CustomButton(
+                name: "ADD TO CART",
+                onTap: (){},
               )
             ],
           )
