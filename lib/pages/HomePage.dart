@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scope_demo/models/ItemModel.dart';
+import 'package:scope_demo/pages/ItemDetail.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -83,10 +84,10 @@ class ItemView extends StatelessWidget {
           child: InkResponse(
             onTap: (){
               print("Tapped");
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(builder: (context)=> Details(detail: data[index]))
-              // );
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context)=> ItemDetailPage())
+              );
             },
             child: Material(
               child:Container(

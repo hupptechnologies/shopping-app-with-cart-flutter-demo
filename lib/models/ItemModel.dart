@@ -58,7 +58,7 @@ var data = [
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc_R7jxbs8Mk2wjW9bG6H9JDbyEU_hRHmjhr3EYn-DYA99YU6zIw"
   },
   {
-    "name": "shoefly black",
+    "name": "Shoefly black",
     "price": 200.0,
     "fav": false,
     "rating": 4.9,
