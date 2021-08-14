@@ -51,7 +51,15 @@ class ItemServices {
     return await sqlService.getItemsRecord();
   }
 
-  addToCard() {}
+  Future setItemAsFavourite(id, flag) async {
+    return await sqlService.setItemAsFavourite(id, flag);
+  }
 
-  removeFromCard() {}
+  addToCart() {
+
+  }
+
+  getCartList() {}
+
+  removeFromCart() {}
 }

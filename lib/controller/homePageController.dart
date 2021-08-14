@@ -5,7 +5,8 @@ import 'package:scope_demo/services/itemService.dart';
 class HomePageController extends GetxController {
   ItemServices itemServices = ItemServices();
   List<ShopItemModel> items = [];
-  int counter = 0;
+  bool isLoading = true;
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -19,21 +20,30 @@ class HomePageController extends GetxController {
 
   loadItems()async{
     try {
+      isLoading = true;
+      update();
+
       List list = await itemServices.loadItems();
       list.forEach((element) {
         items.add(ShopItemModel.fromJson(element));
       });
+
+      isLoading = false;
       update();
     } catch (e) {
       print(e);
     }
   }
 
-  setToFav(int id, bool flag) {
+  setToFav(int id, bool flag) async {
     int index = items.indexWhere((element) => element.id == id);
-    print(index);
-    print(flag);
+
     items[index].fav = flag;
     update();
+    try {
+      await itemServices.setItemAsFavourite(id, flag);
+    } catch (e) {
+      print(e);
+    }
   }
 }

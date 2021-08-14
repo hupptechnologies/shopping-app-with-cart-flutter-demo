@@ -65,6 +65,11 @@ class SQLService {
     });
   }
 
+  Future setItemAsFavourite(int id, bool flag) async {
+    var query = "UPDATE shopping set fav = ? WHERE id = ?";
+    return await this.db?.rawUpdate(query, [flag ? 1 : 0, id]);
+  }
+
   Future getItemsRecord() async {
     try {
       var list = await db?.rawQuery('SELECT * FROM shopping', []);

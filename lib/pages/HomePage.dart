@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         child:GetBuilder<HomePageController>(
           init: controller,
-          builder: (_) => ShopItemListing(items: controller.items,),
+          builder: (_) => controller.isLoading ? Center(child: CircularProgressIndicator(),) : ShopItemListing(items: controller.items,),
         ),
       )
     );
