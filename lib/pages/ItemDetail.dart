@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:scope_demo/controller/homePageController.dart';
+import 'package:scope_demo/models/ItemModel.dart';
 import 'package:scope_demo/widgets/CustomButton.dart';
 import 'package:scope_demo/widgets/DotWidget.dart';
 
+class ItemDetailPage extends StatefulWidget {
+  final int itemId;
 
-class ItemDetailPage extends StatefulWidget{
+  ItemDetailPage({required this.itemId});
+
   @override
   _ItemDetailPageState createState() => _ItemDetailPageState();
 }
@@ -11,7 +17,8 @@ class ItemDetailPage extends StatefulWidget{
 class _ItemDetailPageState extends State<ItemDetailPage> {
   late PageController pageController;
   int active = 0;
-  String image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc_R7jxbs8Mk2wjW9bG6H9JDbyEU_hRHmjhr3EYn-DYA99YU6zIw";
+  String image =
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc_R7jxbs8Mk2wjW9bG6H9JDbyEU_hRHmjhr3EYn-DYA99YU6zIw";
 
   @override
   void initState() {
@@ -20,22 +27,24 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
     pageController = PageController(initialPage: 0);
   }
 
-  Widget buildDot(int index,int num){
+  Widget buildDot(int index, int num) {
     return Padding(
       padding: EdgeInsets.all(5.0),
       child: Container(
         height: 10.0,
         width: 10.0,
         decoration: BoxDecoration(
-            color: (num == index ) ? Colors.black38 : Colors.grey[200],
-            shape: BoxShape.circle
-        ),
+            color: (num == index) ? Colors.black38 : Colors.grey[200],
+            shape: BoxShape.circle),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    HomePageController controller = Get.find<HomePageController>();
+    ShopItemModel model = controller.getItem(widget.itemId);
+
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
@@ -47,10 +56,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                 top: BorderSide(
                     color: Colors.grey.shade300,
                     // color: Colors.grey[300],
-                    width: 1.0
-                )
-            )
-        ),
+                    width: 1.0))),
         child: ListView(
           children: <Widget>[
             Stack(
@@ -65,28 +71,54 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                         height: 200.0,
                         child: PageView(
                           controller: pageController,
-                          onPageChanged: (index){
+                          onPageChanged: (index) {
                             print(index);
                             setState(() {
                               active = index;
                             });
                           },
                           children: <Widget>[
-                            Image.network(image,height: 150.0,),
-                            Image.network(image,height: 150.0,),
-                            Image.network(image,height: 150.0,),
-                            Image.network(image,height: 150.0,)
+                            Image.network(
+                              model.image,
+                              height: 150.0,
+                            ),
+                            Image.network(
+                              model.image,
+                              height: 150.0,
+                            ),
+                            Image.network(
+                              model.image,
+                              height: 150.0,
+                            ),
+                            Image.network(
+                              model.image,
+                              height: 150.0,
+                            )
                           ],
                         ),
                       ),
-                      SizedBox(height: 10.0,),
+                      SizedBox(
+                        height: 10.0,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          DotWidget(activeIndex: active,dotIndex: 0,),
-                          DotWidget(activeIndex: active,dotIndex: 1,),
-                          DotWidget(activeIndex: active,dotIndex: 2,),
-                          DotWidget(activeIndex: active,dotIndex: 3,),
+                          DotWidget(
+                            activeIndex: active,
+                            dotIndex: 0,
+                          ),
+                          DotWidget(
+                            activeIndex: active,
+                            dotIndex: 1,
+                          ),
+                          DotWidget(
+                            activeIndex: active,
+                            dotIndex: 2,
+                          ),
+                          DotWidget(
+                            activeIndex: active,
+                            dotIndex: 3,
+                          ),
                         ],
                       ),
                     ],
@@ -103,30 +135,45 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
                           GestureDetector(
-                              onTap: (){
-                                // print(widget.detail.id);
-                                // model.addToFav(widget.detail);
-                                // showSnak(widget.detail.fav,widget.detail.name);
-                              },
-                              child: false ? Icon(Icons.favorite,size: 20.0,color: Colors.red,) : Icon(Icons.favorite_border,size: 20.0,),
-                            )
-
+                            onTap: () {
+                              // print(widget.detail.id);
+                              // model.addToFav(widget.detail);
+                              // showSnak(widget.detail.fav,widget.detail.name);
+                            },
+                            child: model.fav
+                                ? Icon(
+                                    Icons.favorite,
+                                    size: 20.0,
+                                    color: Colors.red,
+                                  )
+                                : Icon(
+                                    Icons.favorite_border,
+                                    size: 20.0,
+                                  ),
+                          )
                         ],
                       ),
-                    )
-                )
+                    ))
               ],
             ),
-            Divider(color: Colors.grey[300],height: 1.0,),
+            Divider(
+              color: Colors.grey[300],
+              height: 1.0,
+            ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 50.0,vertical: 20.0),
+              padding: EdgeInsets.symmetric(horizontal: 50.0, vertical: 20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text("ShoeGuru",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 19.0),),
+                  Text(
+                    model.name,
+                    style:
+                        TextStyle(fontWeight: FontWeight.w500, fontSize: 19.0),
+                  ),
                   Padding(
                     padding: EdgeInsets.only(top: 10.0),
-                    child: Text("Flutter: Bubble tab indicator for TabBar. Using a Stack Widget and then adding elements to stack on different levels(stacking components like Tabs, above"),
+                    child: Text(
+                        "Flutter: Bubble tab indicator for TabBar. Using a Stack Widget and then adding elements to stack on different levels(stacking components like Tabs, above"),
                   )
                 ],
               ),
@@ -140,9 +187,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
           decoration: BoxDecoration(
               color: Colors.white,
               border: Border(
-                  top: BorderSide(color: Colors.grey.shade300,width: 1.0)
-              )
-          ),
+                  top: BorderSide(color: Colors.grey.shade300, width: 1.0))),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
@@ -151,19 +196,23 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                   children: <Widget>[
                     Container(
                       width: 60.0,
-                      child: Text("Total Amount",style: TextStyle(fontSize: 12.0,color: Colors.grey),),
+                      child: Text(
+                        "Total Amount",
+                        style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                      ),
                     ),
-                    Text("\$100.00",style: TextStyle(fontSize: 25.0,fontWeight: FontWeight.w600)),
+                    Text("\$${model.price.toString()}",
+                        style: TextStyle(
+                            fontSize: 25.0, fontWeight: FontWeight.w600)),
                   ],
                 ),
               ),
               CustomButton(
                 name: "ADD TO CART",
-                onTap: (){},
+                onTap: () {},
               )
             ],
-          )
-      ),
+          )),
     );
   }
 }

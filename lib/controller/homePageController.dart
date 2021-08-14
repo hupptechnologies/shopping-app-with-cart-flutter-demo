@@ -13,15 +13,16 @@ class HomePageController extends GetxController {
     loadItems();
   }
 
+  getItem(int id) {
+    return items.singleWhere((element) => element.id == id);
+  }
+
   loadItems()async{
     try {
       List list = await itemServices.loadItems();
-
       list.forEach((element) {
         items.add(ShopItemModel.fromJson(element));
       });
-      print(items);
-
       update();
     } catch (e) {
       print(e);

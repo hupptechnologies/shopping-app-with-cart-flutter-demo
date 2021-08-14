@@ -104,7 +104,7 @@ class ItemView extends StatelessWidget {
               print("Tapped");
               Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context)=> ItemDetailPage())
+                  MaterialPageRoute(builder: (context)=> ItemDetailPage(itemId: item.id))
               );
             },
             child: Material(
