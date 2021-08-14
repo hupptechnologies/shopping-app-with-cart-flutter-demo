@@ -140,12 +140,13 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                               onTap: () {
                                 controller.setToFav(model.id, !model.fav);
                                 var msg = "";
-                                if(model.fav) {
+                                if (model.fav) {
                                   msg = "${model.name} marked as favourite";
                                 } else {
                                   msg = "${model.name} removed from favourite";
                                 }
-                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(content: Text(msg)));
                               },
                               child: model.fav
                                   ? Icon(
@@ -216,12 +217,30 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                 ),
               ),
               GetBuilder<HomePageController>(builder: (_) {
+                bool isAdded = controller.isAlreadyInCart(model.id);
+                print(isAdded);
+                if (isAdded) {
+                  return CustomButton(
+                    name: "REMOVE CART",
+                    onTap: () async {
+                      try {
+                        controller.removeFromCart(model.id);
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(SnackBar(content: Text("Item removed from cart successfully")));
+                      } catch (e) {
+                        print(e);
+                      }
+                    },
+                  );
+                }
                 return CustomButton(
                   name: "ADD TO CART",
-                  onTap: () async {
+                  onTap: controller.isLoading ? null : ()  async {
                     try {
                       var result = await controller.addToCart(model);
-                      print(result);
+                      controller.getCardList();
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text("Item added in cart successfully")));
                     } catch (e) {
                       print(e);
                     }

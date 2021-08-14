@@ -25,9 +25,14 @@ class HomePageController extends GetxController {
     return items.singleWhere((element) => element.id == id);
   }
 
+  bool isAlreadyInCart(id) {
+    return cartItems.indexWhere((element) => element.shopId == id) > -1;
+  }
+
   getCardList() async{
     try {
       List list = await itemServices.getCartList();
+      cartItems.clear();
       list.forEach((element) {
         cartItems.add(ShopItemModel.fromJson(element));
       });
@@ -68,6 +73,18 @@ class HomePageController extends GetxController {
   }
 
   Future addToCart(ShopItemModel item) async {
-    return await itemServices.addToCart(item);
+    isLoading = true;
+    update();
+    var result = await itemServices.addToCart(item);
+    isLoading = false;
+    update();
+    return result;
+  }
+
+  removeFromCart(int shopId) async {
+    itemServices.removeFromCart(shopId);
+    int index = cartItems.indexWhere((element) => element.shopId == shopId);
+    cartItems.removeAt(index);
+    update();
   }
 }

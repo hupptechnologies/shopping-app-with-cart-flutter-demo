@@ -4,7 +4,7 @@ import 'package:scope_demo/controller/homePageController.dart';
 import 'package:scope_demo/models/ItemModel.dart';
 
 class CartPage extends StatelessWidget {
-  Widget generateCart(ShopItemModel d) {
+  Widget generateCart(BuildContext context, ShopItemModel d) {
     return Padding(
       padding: EdgeInsets.all(5.0),
       child: Container(
@@ -50,7 +50,11 @@ class CartPage extends StatelessWidget {
                         alignment: Alignment.bottomRight,
                         child: InkResponse(
                           onTap: () {
-                            // model.removeCart(d);
+                            Get.find<HomePageController>()
+                                .removeFromCart(d.shopId ?? 0);
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text(
+                                    "Item removed from cart successfully")));
                           },
                           child: Padding(
                             padding: EdgeInsets.only(right: 10.0),
@@ -90,7 +94,9 @@ class CartPage extends StatelessWidget {
           print(controller.cartItems.length);
           return ListView(
             shrinkWrap: true,
-            children: controller.cartItems.map((d) => generateCart(d)).toList(),
+            children: controller.cartItems
+                .map((d) => generateCart(context, d))
+                .toList(),
           );
         },
       ),

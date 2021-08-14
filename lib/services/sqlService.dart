@@ -82,7 +82,6 @@ class SQLService {
   Future getCartList() async {
     try {
       var list = await db?.rawQuery('SELECT * FROM cart_list', []);
-      print(list);
       return list ?? [];
     } catch (e) {
       return Future.error(e);
@@ -93,9 +92,13 @@ class SQLService {
     await this.db?.transaction((txn) async {
       var qry =
           'INSERT INTO cart_list(shop_id, name, price, image,rating,fav) VALUES(${data.id}, "${data.name}",${data.price}, "${data.image}",${data.rating},${data.fav ? 1 : 0})';
-      print(qry);
       int id1 = await txn.rawInsert(qry);
       return id1;
     });
+  }
+
+  Future removeFromCart(int shopId) async {
+    var qry = "DELETE FROM cart_list where shop_id = ${shopId}";
+    return await this.db?.rawDelete(qry);
   }
 }
