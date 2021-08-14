@@ -215,10 +215,19 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                   ],
                 ),
               ),
-              CustomButton(
-                name: "ADD TO CART",
-                onTap: () {},
-              )
+              GetBuilder<HomePageController>(builder: (_) {
+                return CustomButton(
+                  name: "ADD TO CART",
+                  onTap: () async {
+                    try {
+                      var result = await controller.addToCart(model);
+                      print(result);
+                    } catch (e) {
+                      print(e);
+                    }
+                  },
+                );
+              })
             ],
           )),
     );

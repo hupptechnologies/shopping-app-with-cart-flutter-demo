@@ -5,17 +5,37 @@ import 'package:scope_demo/services/itemService.dart';
 class HomePageController extends GetxController {
   ItemServices itemServices = ItemServices();
   List<ShopItemModel> items = [];
+  List<ShopItemModel> cartItems = [];
   bool isLoading = true;
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+    loadDB();
+  }
+
+  loadDB() async {
+    await itemServices.openDB();
     loadItems();
+    getCardList();
   }
 
   getItem(int id) {
     return items.singleWhere((element) => element.id == id);
+  }
+
+  getCardList() async{
+    try {
+      List list = await itemServices.getCartList();
+      list.forEach((element) {
+        cartItems.add(ShopItemModel.fromJson(element));
+      });
+      update();
+
+    } catch (e) {
+      print(e);
+    }
   }
 
   loadItems()async{
@@ -45,5 +65,9 @@ class HomePageController extends GetxController {
     } catch (e) {
       print(e);
     }
+  }
+
+  Future addToCart(ShopItemModel item) async {
+    return await itemServices.addToCart(item);
   }
 }

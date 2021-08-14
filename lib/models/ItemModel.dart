@@ -74,8 +74,16 @@ class ShopItemModel {
   double rating;
   String image;
   int id;
+  int? shopId;
 
-  ShopItemModel({required this.id, required this.fav, required this.rating, required this.price, required this.image, required this.name});
+  ShopItemModel(
+      {this.shopId,
+      required this.id,
+      required this.fav,
+      required this.rating,
+      required this.price,
+      required this.image,
+      required this.name});
 
   factory ShopItemModel.fromJson(Map<String, dynamic> json) {
     return ShopItemModel(
@@ -84,7 +92,8 @@ class ShopItemModel {
       rating: json['rating'],
       price: json['price'],
       image: json['image'],
-      name: json['name']
+      name: json['name'],
+      shopId: json['shop_id'] ?? 0,
     );
   }
 }

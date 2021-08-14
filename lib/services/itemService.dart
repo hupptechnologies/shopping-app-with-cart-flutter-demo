@@ -19,8 +19,11 @@ class ItemServices {
 
   List<ShopItemModel> get items => getShoppingItems();
 
+  Future openDB() async {
+    return await sqlService.openDB();
+  }
+
   loadItems() async {
-    await sqlService.openDB();
     bool isFirst = await isFirstTime();
 
     if (isFirst) {
@@ -40,10 +43,10 @@ class ItemServices {
 
   Future saveToLocalDB() async {
     List<ShopItemModel> items = this.items;
-    for(var i=0; i<items.length; i++) {
-     await sqlService.saveRecord(items[i]);
+    for (var i = 0; i < items.length; i++) {
+      await sqlService.saveRecord(items[i]);
     }
-    storageService.setItem("isFirstTime","true");
+    storageService.setItem("isFirstTime", "true");
     return await getLocalDBRecord();
   }
 
@@ -55,11 +58,13 @@ class ItemServices {
     return await sqlService.setItemAsFavourite(id, flag);
   }
 
-  addToCart() {
-
+  Future addToCart(ShopItemModel data) async {
+    return await sqlService.addToCart(data);
   }
 
-  getCartList() {}
+  Future getCartList() async {
+    return await sqlService.getCartList();
+  }
 
   removeFromCart() {}
 }

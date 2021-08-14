@@ -59,7 +59,7 @@ class SQLService {
   Future saveRecord(ShopItemModel data) async {
     await this.db?.transaction((txn) async {
       var qry =
-          'INSERT INTO shopping(name, price, image,rating,fav) VALUES("${data.name}",${data.price}, "${data.image}",${data.rating},${data.fav ? 1 : 0})';
+          'INSERT INTO shopping(name, price, image,rating,fav, datetime) VALUES("${data.name}",${data.price}, "${data.image}",${data.rating},${data.fav ? 1 : 0}, ${DateTime.now()})';
       int id1 = await txn.rawInsert(qry);
       return id1;
     });
@@ -77,5 +77,25 @@ class SQLService {
     } catch (e) {
       return Future.error(e);
     }
+  }
+
+  Future getCartList() async {
+    try {
+      var list = await db?.rawQuery('SELECT * FROM cart_list', []);
+      print(list);
+      return list ?? [];
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future addToCart(ShopItemModel data) async {
+    await this.db?.transaction((txn) async {
+      var qry =
+          'INSERT INTO cart_list(shop_id, name, price, image,rating,fav) VALUES(${data.id}, "${data.name}",${data.price}, "${data.image}",${data.rating},${data.fav ? 1 : 0})';
+      print(qry);
+      int id1 = await txn.rawInsert(qry);
+      return id1;
+    });
   }
 }
