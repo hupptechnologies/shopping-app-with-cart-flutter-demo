@@ -44,7 +44,6 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
   Widget build(BuildContext context) {
     HomePageController controller = Get.find<HomePageController>();
     ShopItemModel model = controller.getItem(widget.itemId);
-
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
@@ -52,11 +51,13 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
       ),
       body: Container(
         decoration: BoxDecoration(
-            border: Border(
-                top: BorderSide(
-                    color: Colors.grey.shade300,
-                    // color: Colors.grey[300],
-                    width: 1.0))),
+          border: Border(
+            top: BorderSide(
+              color: Colors.grey.shade300,
+              width: 1.0,
+            ),
+          ),
+        ),
         child: ListView(
           children: <Widget>[
             Stack(
@@ -124,36 +125,43 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                     ],
                   ),
                 ),
-                Container(
-                    height: 270.0,
-                    alignment: Alignment(1.0, 1.0),
-                    child: Padding(
-                      padding: EdgeInsets.only(right: 15.0),
-                      child: Column(
-                        verticalDirection: VerticalDirection.down,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          GestureDetector(
-                            onTap: () {
-                              // print(widget.detail.id);
-                              // model.addToFav(widget.detail);
-                              // showSnak(widget.detail.fav,widget.detail.name);
-                            },
-                            child: model.fav
-                                ? Icon(
-                                    Icons.favorite,
-                                    size: 20.0,
-                                    color: Colors.red,
-                                  )
-                                : Icon(
-                                    Icons.favorite_border,
-                                    size: 20.0,
-                                  ),
-                          )
-                        ],
-                      ),
-                    ))
+                GetBuilder<HomePageController>(builder: (value) {
+                  return Container(
+                      height: 270.0,
+                      alignment: Alignment(1.0, 1.0),
+                      child: Padding(
+                        padding: EdgeInsets.only(right: 15.0),
+                        child: Column(
+                          verticalDirection: VerticalDirection.down,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            GestureDetector(
+                              onTap: () {
+                                controller.setToFav(model.id, !model.fav);
+                                var msg = "";
+                                if(model.fav) {
+                                  msg = "${model.name} marked as favourite";
+                                } else {
+                                  msg = "${model.name} removed from favourite";
+                                }
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
+                              },
+                              child: model.fav
+                                  ? Icon(
+                                      Icons.favorite,
+                                      size: 20.0,
+                                      color: Colors.red,
+                                    )
+                                  : Icon(
+                                      Icons.favorite_border,
+                                      size: 20.0,
+                                    ),
+                            )
+                          ],
+                        ),
+                      ));
+                })
               ],
             ),
             Divider(

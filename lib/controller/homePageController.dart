@@ -5,7 +5,7 @@ import 'package:scope_demo/services/itemService.dart';
 class HomePageController extends GetxController {
   ItemServices itemServices = ItemServices();
   List<ShopItemModel> items = [];
-
+  int counter = 0;
   @override
   void onInit() {
     // TODO: implement onInit
@@ -27,5 +27,13 @@ class HomePageController extends GetxController {
     } catch (e) {
       print(e);
     }
+  }
+
+  setToFav(int id, bool flag) {
+    int index = items.indexWhere((element) => element.id == id);
+    print(index);
+    print(flag);
+    items[index].fav = flag;
+    update();
   }
 }
