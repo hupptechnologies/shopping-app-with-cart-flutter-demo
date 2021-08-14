@@ -1,4 +1,5 @@
-import 'package:scope_demo/models/ItemModel.dart';
+
+import 'package:ShoppingApp/models/ItemModel.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -59,7 +60,7 @@ class SQLService {
   Future saveRecord(ShopItemModel data) async {
     await this.db?.transaction((txn) async {
       var qry =
-          'INSERT INTO shopping(name, price, image,rating,fav, datetime) VALUES("${data.name}",${data.price}, "${data.image}",${data.rating},${data.fav ? 1 : 0}, ${DateTime.now()})';
+          'INSERT INTO shopping(name, price, image,rating,fav) VALUES("${data.name}",${data.price}, "${data.image}",${data.rating},${data.fav ? 1 : 0})';
       int id1 = await txn.rawInsert(qry);
       return id1;
     });

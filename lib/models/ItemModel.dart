@@ -4,7 +4,7 @@ var data = [
   {
     "name": "Nike",
     "price": 25.0,
-    "fav": true,
+    "fav": false,
     "rating": 4.5,
     "image":
         "https://rukminim1.flixcart.com/image/832/832/jao8uq80/shoe/3/r/q/sm323-9-sparx-white-original-imaezvxwmp6qz6tg.jpeg?q=70"
@@ -12,7 +12,7 @@ var data = [
   {
     "name": "Brasher Traveller Brasher Traveller ",
     "price": 200.0,
-    "fav": true,
+    "fav": false,
     "rating": 4.5,
     "image":
         "https://cdn-image.travelandleisure.com/sites/default/files/styles/1600x1000/public/merrell_0.jpg?itok=wFRPiIPw"
@@ -28,7 +28,7 @@ var data = [
   {
     "name": "Running Shoe Brooks Highly",
     "price": 3001.0,
-    "fav": true,
+    "fav": false,
     "rating": 3.5,
     "image":
         "https://cdn.pixabay.com/photo/2014/06/18/18/42/running-shoe-371625_960_720.jpg"
@@ -36,7 +36,7 @@ var data = [
   {
     "name": "Ugly Shoe Trends 2018",
     "price": 25.0,
-    "fav": true,
+    "fav": false,
     "rating": 4.5,
     "image":
         "https://pixel.nymag.com/imgs/fashion/daily/2018/04/18/uglee-shoes/70-fila-disruptor.w710.h473.2x.jpg"
@@ -52,7 +52,7 @@ var data = [
   {
     "name": "ShoeGuru",
     "price": 205.0,
-    "fav": true,
+    "fav": false,
     "rating": 4.0,
     "image":
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc_R7jxbs8Mk2wjW9bG6H9JDbyEU_hRHmjhr3EYn-DYA99YU6zIw"

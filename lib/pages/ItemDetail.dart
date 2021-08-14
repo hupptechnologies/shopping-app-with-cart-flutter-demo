@@ -1,9 +1,9 @@
+import 'package:ShoppingApp/controller/homePageController.dart';
+import 'package:ShoppingApp/models/ItemModel.dart';
+import 'package:ShoppingApp/widgets/CustomButton.dart';
+import 'package:ShoppingApp/widgets/DotWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:scope_demo/controller/homePageController.dart';
-import 'package:scope_demo/models/ItemModel.dart';
-import 'package:scope_demo/widgets/CustomButton.dart';
-import 'package:scope_demo/widgets/DotWidget.dart';
 
 class ItemDetailPage extends StatefulWidget {
   final int itemId;
@@ -218,7 +218,6 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
               ),
               GetBuilder<HomePageController>(builder: (_) {
                 bool isAdded = controller.isAlreadyInCart(model.id);
-                print(isAdded);
                 if (isAdded) {
                   return CustomButton(
                     name: "REMOVE CART",

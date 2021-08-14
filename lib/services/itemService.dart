@@ -1,6 +1,6 @@
-import 'package:scope_demo/models/ItemModel.dart';
-import 'package:scope_demo/services/sqlService.dart';
-import 'package:scope_demo/services/storageService.dart';
+import 'package:ShoppingApp/models/ItemModel.dart';
+import 'package:ShoppingApp/services/sqlService.dart';
+import 'package:ShoppingApp/services/storageService.dart';
 
 class ItemServices {
   SQLService sqlService = SQLService();

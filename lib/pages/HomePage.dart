@@ -1,10 +1,10 @@
+import 'package:ShoppingApp/controller/homePageController.dart';
+import 'package:ShoppingApp/models/ItemModel.dart';
+import 'package:ShoppingApp/pages/CartPage.dart';
+import 'package:ShoppingApp/pages/ItemDetail.dart';
+import 'package:ShoppingApp/services/itemService.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:scope_demo/controller/homePageController.dart';
-import 'package:scope_demo/models/ItemModel.dart';
-import 'package:scope_demo/pages/CartPage.dart';
-import 'package:scope_demo/pages/ItemDetail.dart';
-import 'package:scope_demo/services/itemService.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -104,7 +104,6 @@ class ItemView extends StatelessWidget {
       padding: EdgeInsets.all(5.0),
       child: InkResponse(
           onTap: () {
-            print("Tapped");
             Navigator.push(
                 context,
                 MaterialPageRoute(

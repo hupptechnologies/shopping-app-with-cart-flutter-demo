@@ -1,7 +1,7 @@
+import 'package:ShoppingApp/controller/homePageController.dart';
+import 'package:ShoppingApp/models/ItemModel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:scope_demo/controller/homePageController.dart';
-import 'package:scope_demo/models/ItemModel.dart';
 
 class CartPage extends StatelessWidget {
   Widget generateCart(BuildContext context, ShopItemModel d) {
@@ -91,7 +91,11 @@ class CartPage extends StatelessWidget {
       ),
       body: GetBuilder<HomePageController>(
         builder: (_) {
-          print(controller.cartItems.length);
+          if(controller.cartItems.length == 0) {
+            return Center(
+              child: Text("No item found"),
+            );
+          }
           return ListView(
             shrinkWrap: true,
             children: controller.cartItems

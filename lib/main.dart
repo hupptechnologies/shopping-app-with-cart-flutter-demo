@@ -1,6 +1,5 @@
+import 'package:ShoppingApp/pages/HomePage.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:scope_demo/pages/HomePage.dart';
 
 void main(){
   runApp(Main());

@@ -1,6 +1,6 @@
+import 'package:ShoppingApp/models/ItemModel.dart';
+import 'package:ShoppingApp/services/itemService.dart';
 import 'package:get/get.dart';
-import 'package:scope_demo/models/ItemModel.dart';
-import 'package:scope_demo/services/itemService.dart';
 
 class HomePageController extends GetxController {
   ItemServices itemServices = ItemServices();
