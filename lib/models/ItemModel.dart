@@ -80,7 +80,7 @@ class ShopItemModel {
   factory ShopItemModel.fromJson(Map<String, dynamic> json) {
     return ShopItemModel(
       id: json['id'],
-      fav: json['fav'],
+      fav: json['fav'] == 1,
       rating: json['rating'],
       price: json['price'],
       image: json['image'],

@@ -68,11 +68,8 @@ class SQLService {
   Future getItemsRecord() async {
     try {
       var list = await db?.rawQuery('SELECT * FROM shopping', []);
-      print("LIST>>>>>>>>");
-      print(list);
-      return list;
+      return list ?? [];
     } catch (e) {
-      print(e);
       return Future.error(e);
     }
   }

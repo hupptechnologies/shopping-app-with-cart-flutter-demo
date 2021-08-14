@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:scope_demo/controller/homePageController.dart';
 import 'package:scope_demo/models/ItemModel.dart';
 import 'package:scope_demo/pages/CartPage.dart';
 import 'package:scope_demo/pages/ItemDetail.dart';
@@ -13,20 +15,19 @@ class _HomePageState extends State<HomePage> {
 
   ItemServices itemServices = ItemServices();
   List<ShopItemModel> items = [];
+  final HomePageController controller = Get.put(HomePageController());
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
-    itemServices.loadItems();
-    setState(() {
-      items = itemServices.items;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
+
+
+
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
@@ -56,7 +57,12 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: ShopItemListing(items: items,),
+      body: Container(
+        child:GetBuilder<HomePageController>(
+          init: controller,
+          builder: (_) => ShopItemListing(items: controller.items,),
+        ),
+      )
     );
   }
 }

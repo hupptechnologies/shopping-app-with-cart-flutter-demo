@@ -20,16 +20,17 @@ class ItemServices {
   List<ShopItemModel> get items => getShoppingItems();
 
   loadItems() async {
-    var flag = await sqlService.openDB();
-    print(flag);
+    await sqlService.openDB();
     bool isFirst = await isFirstTime();
-    print("IS FIRST $isFirst");
+
     if (isFirst) {
       // Load From local DB
-      getLocalDBRecord();
+      List items = await getLocalDBRecord();
+      return items;
     } else {
-      // Save Record into DB
-      saveToLocalDB();
+      // Save Record into DB & load record
+      List items = await saveToLocalDB();
+      return items;
     }
   }
 
@@ -37,25 +38,17 @@ class ItemServices {
     return await storageService.getItem("isFirstTime") == 'true';
   }
 
-  saveToLocalDB() async {
-    try {
-      List<ShopItemModel> items = this.items;
-      for(var i=0; i<items.length; i++) {
-       await sqlService.saveRecord(items[i]);
-      }
-      storageService.setItem("isFirstTime","true");
-      getLocalDBRecord();
-    } catch (e) {
-      print("ERROR WHILE SAVE TO LOACAL $e");
+  Future saveToLocalDB() async {
+    List<ShopItemModel> items = this.items;
+    for(var i=0; i<items.length; i++) {
+     await sqlService.saveRecord(items[i]);
     }
+    storageService.setItem("isFirstTime","true");
+    return await getLocalDBRecord();
   }
 
-  getLocalDBRecord() async {
-    try {
-      sqlService.getItemsRecord();
-    } catch (e) {
-      print("ERROR IN GET LOCAL DB RECORD $e");
-    }
+  Future getLocalDBRecord() async {
+    return await sqlService.getItemsRecord();
   }
 
   addToCard() {}

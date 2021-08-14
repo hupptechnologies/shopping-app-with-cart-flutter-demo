@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.3
 #  scoped_model: ^2.0.0-nullsafety.0
 #  flutter_rating: ^0.0.2
+  get: ^4.3.8
   sqflite: ^2.0.0+3
   path_provider: ^2.0.2
   shared_preferences: ^2.0.6
