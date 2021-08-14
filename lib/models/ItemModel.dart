@@ -73,11 +73,13 @@ class ShopItemModel {
   bool fav;
   double rating;
   String image;
+  int id;
 
-  ShopItemModel({required this.fav, required this.rating, required this.price, required this.image, required this.name});
+  ShopItemModel({required this.id, required this.fav, required this.rating, required this.price, required this.image, required this.name});
 
   factory ShopItemModel.fromJson(Map<String, dynamic> json) {
     return ShopItemModel(
+      id: json['id'],
       fav: json['fav'],
       rating: json['rating'],
       price: json['price'],

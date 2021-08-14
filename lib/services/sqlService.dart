@@ -1,30 +1,30 @@
+import 'package:scope_demo/models/ItemModel.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class SQLService {
   Database? db;
 
-  openDB() async {
+  Future openDB() async {
     try {
-
       // Get a location using getDatabasesPath
       var databasesPath = await getDatabasesPath();
       String path = join(databasesPath, 'shopping.db');
 
       // open the database
-      Database database = await openDatabase(
+      db = await openDatabase(
         path,
         version: 1,
         onCreate: (Database db, int version) async {
+          print(db);
           this.db = db;
           createTables();
         },
-        onOpen: (Database db) {
-          this.db = db;
-        }
       );
+      return true;
     } catch (e) {
       print("ERROR IN OPEN DATABASE $e");
+      return Future.error(e);
     }
   }
 
@@ -56,28 +56,19 @@ class SQLService {
     }
   }
 
-  Future saveRecord(dynamic data) async {
-    try {
-      return await db?.transaction((tx) async {
-        try {
-          print("CALLED>>>");
-          var qry =
-              'INSERT INTO shopping(shop_id,name, price, image,rating,fav) VALUES(${data['id']},"${data['name']}",${data['price']}, "${data['image']}",${data['rating']},${data['fav'] ? 1 : 0})';
-          return  tx.execute(qry);
-        } catch (e) {
-          print(e);
-          return Future.error(e);
-        }
-      });
-    } catch (e) {
-      print("ERROR IN SAVE RECORD $e");
-      return Future.error(e);
-    }
+  Future saveRecord(ShopItemModel data) async {
+    await this.db?.transaction((txn) async {
+      var qry =
+          'INSERT INTO shopping(name, price, image,rating,fav) VALUES("${data.name}",${data.price}, "${data.image}",${data.rating},${data.fav ? 1 : 0})';
+      int id1 = await txn.rawInsert(qry);
+      return id1;
+    });
   }
 
   Future getItemsRecord() async {
     try {
-      var list = await db?.rawQuery('SELECT * FROM shopping',[]);
+      var list = await db?.rawQuery('SELECT * FROM shopping', []);
+      print("LIST>>>>>>>>");
       print(list);
       return list;
     } catch (e) {
