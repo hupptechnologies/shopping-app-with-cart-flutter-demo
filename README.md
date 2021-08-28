@@ -18,6 +18,14 @@
 3. BoxDecoration - For box-shadow & rounded Image
 
 
+### Screen-shot
+
+![Alt text](./images/HomeScreen.png?raw=true "Home Screen")
+![Alt text](./images/ProductDetails1.png?raw=true "Product Details")
+![Alt text](./images/ProductDetails2.png?raw=true "Product Details")
+![Alt text](./images/CartList.png?raw=true "Product Details")
+
+
 Video Demo : https://youtu.be/15-S9ob0OgQ
 
 created by : hello@hupp.in
