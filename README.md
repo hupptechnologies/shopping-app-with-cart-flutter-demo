@@ -26,6 +26,8 @@
 ![Alt text](./images/CartList.png?raw=true "Product Details")
 
 
+You can download apk file from [here](./app-release.apk)
+
 Video Demo : https://youtu.be/15-S9ob0OgQ
 
 created by : hello@hupp.in
