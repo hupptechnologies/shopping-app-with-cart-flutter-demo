@@ -8,23 +8,23 @@
     - Remove from cart
     - WANT TO SEE NEW FEATURES ? CREATE AN ISSUE WITH LABEL "FEATURE" TAG ON IT AND WE'LL WORK ON IT IN OUR NEXT CODING SPRINT ON THIS PROJECT !!
 ### Plugin
-1. Scope Model       : https://pub.dartlang.org/packages/scoped_model
-2. Path Provider     : https://pub.dartlang.org/packages/path_provider
+1. Get               : https://pub.dartlang.org/packages/get
 3. Sqflite           : https://pub.dartlang.org/packages/sqflite
-4. Rating Star       : https://pub.dartlang.org/packages/flutter_rating
 5. Shared preference : https://pub.dev/packages/shared_preferences
 
 ### Widgets
 1. ListView
 2. GridView
-3. BoxDecoration - For boxshadow & rounded Image
-4. Rating Star
+3. BoxDecoration - For box-shadow & rounded Image
 
-## Preview
 
-[<img src="http://demo.hupp.in/hupp-files/ecom1.png" width="270" height="480" alt="Brand-first shopping design" align="left">](http://demo.hupp.in/hupp-files/ecom1.png)
-[<img src="http://demo.hupp.in/hupp-files/ecom2.png" width="270" height="480" alt="Brand-first shopping design" align="left">](http://demo.hupp.in/hupp-files/ecom2.png)
-[<img src="http://demo.hupp.in/hupp-files/ecom3.png" width="270" height="480" alt="Brand-first shopping design" align="left">](http://demo.hupp.in/hupp-files/ecom3.png)
+### Screen-shot
+
+![Alt text](./images/HomeScreen.png?raw=true "Home Screen")
+![Alt text](./images/ProductDetails1.png?raw=true "Product Details")
+![Alt text](./images/ProductDetails2.png?raw=true "Product Details")
+![Alt text](./images/CartList.png?raw=true "Product Details")
+
 
 Video Demo : https://youtu.be/15-S9ob0OgQ
 
