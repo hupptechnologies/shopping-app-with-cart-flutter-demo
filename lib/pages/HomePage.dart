@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
                   child: Stack(
                     children: [
                       GetBuilder<HomePageController>(builder: (_) => Align(
-                        child: Text(controller.cartItems.length.toString()),
+                        child: Text(controller.cartItems.length > 0 ? controller.cartItems.length.toString() : ''),
                         alignment: Alignment.topLeft,
                       )),
                       Align(
