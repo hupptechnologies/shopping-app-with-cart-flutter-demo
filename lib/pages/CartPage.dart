@@ -29,7 +29,7 @@ class CartPage extends StatelessWidget {
                       topRight: Radius.circular(10.0),
                       bottomRight: Radius.circular(10.0)),
                   image: DecorationImage(
-                      image: NetworkImage(d.image), fit: BoxFit.fill)),
+                      image: NetworkImage(d.image), fit: BoxFit.fitHeight)),
             ),
             Expanded(
                 child: Padding(
@@ -80,6 +80,13 @@ class CartPage extends StatelessWidget {
     );
   }
 
+
+  getItemTotal(List<ShopItemModel> items) {
+    double sum = 0.0;
+    items.forEach((e){sum += e.price;});
+    return "\$$sum";
+  }
+
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<HomePageController>();
@@ -89,20 +96,71 @@ class CartPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Cart list"),
       ),
-      body: GetBuilder<HomePageController>(
-        builder: (_) {
-          if(controller.cartItems.length == 0) {
-            return Center(
-              child: Text("No item found"),
-            );
-          }
-          return ListView(
-            shrinkWrap: true,
-            children: controller.cartItems
-                .map((d) => generateCart(context, d))
-                .toList(),
-          );
-        },
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: GetBuilder<HomePageController>(
+                builder: (_) {
+                  if (controller.cartItems.length == 0) {
+                    return Center(
+                      child: Text("No item found"),
+                    );
+                  }
+                  return ListView(
+                    shrinkWrap: true,
+                    children: controller.cartItems
+                        .map((d) => generateCart(context, d))
+                        .toList(),
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: Container(
+        color: Colors.white,
+        child: SafeArea(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                child: GetBuilder<HomePageController>(
+                  builder: (_) {
+                    return RichText(
+                      text: TextSpan(
+                          text: "Total  ",
+                          style: TextStyle(color: Colors.black, fontSize: 18),
+                          children: <TextSpan>[
+                            TextSpan(
+                                text: getItemTotal(controller.cartItems).toString(),
+                                style: TextStyle(fontWeight: FontWeight.bold)
+                            )
+                          ]
+                      ),
+                    );
+                  },
+                )
+              ),
+              Container(
+                alignment: Alignment.centerLeft,
+                height: 50,
+                color: Colors.white,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 40,
+                    width: 100,
+                    child: Text("Checkout", style: TextStyle(fontSize: 18),),
+                  )
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

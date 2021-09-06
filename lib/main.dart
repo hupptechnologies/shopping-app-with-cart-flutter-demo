@@ -15,23 +15,3 @@ class Main extends StatelessWidget{
     );
   }
 }
-
-// class Main extends StatelessWidget{
-//   @override
-//   Widget build(BuildContext context) {
-//     AppModel appModel = AppModel();
-//     // TODO: implement build
-//     return ScopedModel<AppModel>(
-//       model: appModel,
-//       child: MaterialApp(
-//         home: Home(appModel: appModel,),
-//         // routes: routes,
-//         theme: ThemeData(
-//             primaryColor: Colors.white
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-
