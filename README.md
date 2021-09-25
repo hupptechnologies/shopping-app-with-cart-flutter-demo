@@ -31,3 +31,6 @@ You can download apk file from [here](./app-release.apk)
 Video Demo : https://youtu.be/15-S9ob0OgQ
 
 created by : hello@hupp.in
+
+
+https://blog.hupp.tech/flutter-e-commerce-app/
